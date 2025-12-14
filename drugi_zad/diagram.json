@@ -11,13 +11,6 @@
       "left": -159.4,
       "attrs": { "color": "red" }
     },
-    {
-      "type": "wokwi-led",
-      "id": "led2",
-      "top": 111.6,
-      "left": -197.8,
-      "attrs": { "color": "red" }
-    },
     { "type": "wokwi-potentiometer", "id": "pot1", "top": 75.5, "left": -115.4, "attrs": {} }
   ],
   "connections": [
@@ -27,9 +20,7 @@
     [ "pot1:GND", "nucleo:GND.5", "black", [ "v0" ] ],
     [ "pot1:SIG", "nucleo:A0", "green", [ "v0" ] ],
     [ "led1:A", "nucleo:A1", "green", [ "v0" ] ],
-    [ "led1:C", "nucleo:GND.6", "green", [ "v0" ] ],
-    [ "nucleo:A2", "led2:A", "green", [ "h0" ] ],
-    [ "led2:C", "nucleo:GND.6", "green", [ "v0" ] ]
+    [ "led1:C", "nucleo:GND.6", "green", [ "v0" ] ]
   ],
   "dependencies": {}
 }
