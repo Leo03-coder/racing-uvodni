@@ -32,7 +32,6 @@ int main(void) {
   MX_ADC_Init();
 
   for (;;) {
-    LED_Toggle();
     Transmitter();
     Receiver();
   }
@@ -44,7 +43,7 @@ void MX_GPIO_Init(void)
 
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
-  GPIO_InitStruct.Pin = GPIO_PIN_1 | GPIO_PIN_4;
+  GPIO_InitStruct.Pin = GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -81,19 +80,6 @@ void MX_ADC_Init(void)
   }
 }
 
-void LED_Toggle(void) {
-
-  if (HAL_GetTick() - last_led_tick >= 300) {
-
-      GPIO_PinState current_state = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1);
-      
-      GPIO_PinState new_state = (current_state == GPIO_PIN_SET) ? GPIO_PIN_RESET : GPIO_PIN_SET;
-      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, new_state);
-
-      last_led_tick = HAL_GetTick();
-  }
-}
-
 void Transmitter(void) {
   if (HAL_GetTick() - last_tick >= 500) {
         HAL_ADC_Start(&hadc1);                     
@@ -121,11 +107,11 @@ void Receiver(void) {
 
       if (adc > 2000) {
           printf("High ADC value from Node 1!\n");
-          HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+          HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
       }
       else {
           printf("ID %u: ADC=%u, LED=%u\n", id, adc, led);
-          HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+          HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
       }
 
       new_message = 0;
