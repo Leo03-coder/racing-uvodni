@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-st-nucleo-c031c6", "id": "nucleo", "top": 0.83, "left": -0.98, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": 75.5, "left": -192.2, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot2", "top": 85.1, "left": -86.6, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 73.2,
+      "left": -245.8,
+      "attrs": { "color": "red" }
+    }
+  ],
+  "connections": [
+    [ "$serialMonitor:TX", "nucleo:PA3", "", [] ],
+    [ "$serialMonitor:RX", "nucleo:PA2", "", [] ],
+    [ "pot2:GND", "nucleo:GND.5", "black", [ "v0" ] ],
+    [ "pot2:VCC", "nucleo:3V3.2", "red", [ "v0" ] ],
+    [ "pot1:SIG", "nucleo:A1", "green", [ "v0" ] ],
+    [ "pot1:GND", "nucleo:GND.5", "black", [ "v0" ] ],
+    [ "pot1:VCC", "nucleo:3V3.2", "red", [ "v0" ] ],
+    [ "pot2:SIG", "nucleo:A0", "green", [ "v0" ] ],
+    [ "led1:A", "nucleo:A2", "green", [ "v0" ] ],
+    [ "led1:C", "nucleo:GND.6", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
